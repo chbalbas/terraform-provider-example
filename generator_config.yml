@@ -1,0 +1,72 @@
+---
+version:
+  0.1.0
+provider:
+  name: api
+
+data_sources:
+  order:
+    read:
+      path: /orders/{id}
+      method: GET
+  orders:
+    read:
+      path: /orders
+      method: GET
+  product:
+    read:
+      path: /products/{id}
+      method: GET
+  products:
+    read:
+      path: /products
+      method: GET
+  customer:
+    read:
+      path: /customers/{id}
+      method: GET
+  customers:
+    read:
+      path: /customers
+      method: GET
+
+resources:
+  order:
+    read:
+      path: /orders/{id}
+      method: GET
+    create:
+      path: /orders
+      method: POST
+    update:
+      path: /orders/{id}
+      method: PATCH
+    delete:
+      path: /orders/{id}
+      method: DELETE
+  product:
+    read:
+      path: /products/{id}
+      method: GET
+    create:
+      path: /products
+      method: POST
+    update:
+      path: /products/{id}
+      method: PATCH
+    delete:
+      path: /products/{id}
+      method: DELETE
+  customer:
+    read:
+      path: /customers/{id}
+      method: GET
+    create:
+      path: /customers
+      method: POST
+    update:
+      path: /customers/{id}
+      method: PATCH
+    delete:
+      path: /customers/{id}
+      method: DELETE

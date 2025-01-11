@@ -1,0 +1,405 @@
+{
+	"datasources": [
+		{
+			"name": "customer",
+			"schema": {
+				"attributes": [
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "required",
+							"description": "Id of the customer to be retrieved."
+						}
+					},
+					{
+						"name": "customer",
+						"single_nested": {
+							"computed_optional_required": "computed",
+							"attributes": [
+								{
+									"name": "customer_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "email",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "name",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "customers",
+			"schema": {
+				"attributes": [
+					{
+						"name": "customers",
+						"list_nested": {
+							"computed_optional_required": "computed",
+							"nested_object": {
+								"attributes": [
+									{
+										"name": "customer_id",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									},
+									{
+										"name": "email",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									},
+									{
+										"name": "name",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "order",
+			"schema": {
+				"attributes": [
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "required",
+							"description": "Id of the order to be examined."
+						}
+					},
+					{
+						"name": "order",
+						"single_nested": {
+							"computed_optional_required": "computed",
+							"attributes": [
+								{
+									"name": "customer_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "order_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "product_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "orders",
+			"schema": {
+				"attributes": [
+					{
+						"name": "customer_id",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"description": "Filter orders by given CustomerId"
+						}
+					},
+					{
+						"name": "product_id",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"description": "Filter orders by given ProductId"
+						}
+					},
+					{
+						"name": "orders",
+						"list_nested": {
+							"computed_optional_required": "computed",
+							"nested_object": {
+								"attributes": [
+									{
+										"name": "customer_id",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									},
+									{
+										"name": "order_id",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									},
+									{
+										"name": "product_id",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "product",
+			"schema": {
+				"attributes": [
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "required",
+							"description": "Id of the product to be retrieved."
+						}
+					},
+					{
+						"name": "product",
+						"single_nested": {
+							"computed_optional_required": "computed",
+							"attributes": [
+								{
+									"name": "name",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "price",
+									"number": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "product_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								}
+							]
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "products",
+			"schema": {
+				"attributes": [
+					{
+						"name": "products",
+						"list_nested": {
+							"computed_optional_required": "computed",
+							"nested_object": {
+								"attributes": [
+									{
+										"name": "name",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									},
+									{
+										"name": "price",
+										"number": {
+											"computed_optional_required": "computed"
+										}
+									},
+									{
+										"name": "product_id",
+										"string": {
+											"computed_optional_required": "computed"
+										}
+									}
+								]
+							}
+						}
+					}
+				]
+			}
+		}
+	],
+	"provider": {
+		"name": "api"
+	},
+	"resources": [
+		{
+			"name": "customer",
+			"schema": {
+				"attributes": [
+					{
+						"name": "email",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "customer",
+						"single_nested": {
+							"computed_optional_required": "computed",
+							"attributes": [
+								{
+									"name": "customer_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "email",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "name",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"description": "Id of the customer to be retrieved."
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "order",
+			"schema": {
+				"attributes": [
+					{
+						"name": "customer_id",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "product_id",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "order",
+						"single_nested": {
+							"computed_optional_required": "computed",
+							"attributes": [
+								{
+									"name": "customer_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "order_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "product_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"description": "Id of the order to be examined."
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "product",
+			"schema": {
+				"attributes": [
+					{
+						"name": "name",
+						"string": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "price",
+						"number": {
+							"computed_optional_required": "required"
+						}
+					},
+					{
+						"name": "product",
+						"single_nested": {
+							"computed_optional_required": "computed",
+							"attributes": [
+								{
+									"name": "name",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "price",
+									"number": {
+										"computed_optional_required": "computed"
+									}
+								},
+								{
+									"name": "product_id",
+									"string": {
+										"computed_optional_required": "computed"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "id",
+						"string": {
+							"computed_optional_required": "computed_optional",
+							"description": "Id of the product to be retrieved."
+						}
+					}
+				]
+			}
+		}
+	],
+	"version": "0.1"
+}

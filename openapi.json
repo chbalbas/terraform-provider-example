@@ -1,0 +1,589 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Order API",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/orders": {
+      "get": {
+        "operationId": "get-orders",
+        "parameters": [
+          {
+            "name": "customer_id",
+            "in": "query",
+            "description": "Filter orders by given CustomerId",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "c-123456789"
+            }
+          },
+          {
+            "name": "product_id",
+            "in": "query",
+            "description": "Filter orders by given ProductId",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "p-123456789"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All orders done.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrdersResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all orders"
+      },
+      "post": {
+        "operationId": "create-order",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrderDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create an order"
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "operationId": "get-order",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the order to be examined.",
+            "schema": {
+              "type": "string",
+              "example": "o-12345678"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get an order"
+      }
+    },
+    "/products": {
+      "get": {
+        "operationId": "get-products",
+        "responses": {
+          "200": {
+            "description": "All products available.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all products"
+      },
+      "post": {
+        "operationId": "create-product",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Product created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a product"
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "operationId": "get-product",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the product to be retrieved.",
+            "schema": {
+              "type": "string",
+              "example": "p-123456789"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a specific product"
+      }
+    },
+    "/customers": {
+      "get": {
+        "operationId": "get-customers",
+        "responses": {
+          "200": {
+            "description": "All customers retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomersResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all customers"
+      },
+      "post": {
+        "operationId": "create-customer",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer created successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Create a customer"
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "operationId": "get-customer",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "Id of the customer to be retrieved.",
+            "schema": {
+              "type": "string",
+              "example": "c-123456789"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer retrieved successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomerResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorModel"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get a specific customer"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "example": "o-12345678"
+          },
+          "customer_id": {
+            "type": "string",
+            "example": "c-123456789"
+          },
+          "product_id": {
+            "type": "string",
+            "example": "p-123456789"
+          }
+        },
+        "required": [
+          "order_id",
+          "customer_id",
+          "product_id"
+        ]
+      },
+      "OrderDetails": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "example": "c-123456789"
+          },
+          "product_id": {
+            "type": "string",
+            "example": "p-123456789"
+          }
+        },
+        "required": [
+          "customer_id",
+          "product_id"
+        ]
+      },
+      "OrderResponse": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/Order"
+          }
+        },
+        "required": [
+          "order"
+        ]
+      },
+      "OrdersResponse": {
+        "type": "object",
+        "properties": {
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Order"
+            }
+          }
+        },
+        "required": [
+          "orders"
+        ]
+      },
+      "Product": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "example": "p-123456789"
+          },
+          "name": {
+            "type": "string",
+            "example": "Sample Product"
+          },
+          "price": {
+            "type": "number",
+            "example": 99.99
+          }
+        },
+        "required": [
+          "product_id",
+          "name",
+          "price"
+        ]
+      },
+      "ProductDetails": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Sample Product"
+          },
+          "price": {
+            "type": "number",
+            "example": 99.99
+          }
+        },
+        "required": [
+          "name",
+          "price"
+        ]
+      },
+      "ProductResponse": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "$ref": "#/components/schemas/Product"
+          }
+        },
+        "required": [
+          "product"
+        ]
+      },
+      "ProductsResponse": {
+        "type": "object",
+        "properties": {
+          "products": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Product"
+            }
+          }
+        },
+        "required": [
+          "products"
+        ]
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "customer_id": {
+            "type": "string",
+            "example": "c-123456789"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com"
+          }
+        },
+        "required": [
+          "customer_id",
+          "name",
+          "email"
+        ]
+      },
+      "CustomerDetails": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "example": "johndoe@example.com"
+          }
+        },
+        "required": [
+          "name",
+          "email"
+        ]
+      },
+      "CustomerResponse": {
+        "type": "object",
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "required": [
+          "customer"
+        ]
+      },
+      "CustomersResponse": {
+        "type": "object",
+        "properties": {
+          "customers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Customer"
+            }
+          }
+        },
+        "required": [
+          "customers"
+        ]
+      },
+      "ErrorModel": {
+        "type": "object",
+        "properties": {
+          "detail": {
+            "type": "string",
+            "example": "Property foo is required but is missing."
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ErrorDetail"
+            }
+          },
+          "instance": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/error-log/abc123"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int64",
+            "example": 400
+          },
+          "title": {
+            "type": "string",
+            "example": "Bad Request"
+          },
+          "type": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://example.com/errors/example"
+          }
+        }
+      },
+      "ErrorDetail": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "type": "string",
+            "description": "Where the error occurred, e.g. 'body.items[3].tags' or 'path.thing-id'"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message text"
+          },
+          "value": {
+            "description": "The value at the given location"
+          }
+        }
+      }
+    }
+  }
+}
