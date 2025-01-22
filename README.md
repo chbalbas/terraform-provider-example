@@ -103,7 +103,9 @@ done
 ---
 ---
 
-## Next Steps  
+## Next Steps
+
+> **_NOTE:_** The `api_provider/provider.go` file was manually created to define the core logic for API interaction, including configuration and resource registration. It serves as the backbone of the provider, ensuring seamless communication with your API. Customize this file to fit your API’s specific requirements.
 
 1. Implement the logic in the generated scaffolding to interact with your API.  
 2. Compile and test your custom provider.  
